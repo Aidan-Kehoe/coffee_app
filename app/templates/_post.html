@@ -1,0 +1,12 @@
+<table>
+	<tr valign="top">
+		<td><img src="{{url_for('static', filename='diana.jpg')}}" width = "50" height = "85"></td>
+		<td>
+			<a href="{{ url_for('user', username=review.author.username) }}">
+				{{ review.author.username }}
+			</a>
+			says:<br>{{ review.name }}
+			<br>{{ review.review }}
+		</td>
+	</tr>
+</table>

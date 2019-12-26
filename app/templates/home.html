@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+	{% for review in reviews %}
+		{% include '_post.html' %}
+	{% endfor %}
+{% endblock %}
