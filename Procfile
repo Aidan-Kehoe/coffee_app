@@ -1,1 +1,1 @@
-worker: python main.py
+web: flask db upgrade; flask translate compile; gunicorn main:app
