@@ -47,7 +47,7 @@ class EditProfileForm(FlaskForm):
 class ReviewForm(FlaskForm):
 	name = StringField('Coffee Name', validators = [DataRequired()])
 	origin = StringField('Coffee Origin', validators = [DataRequired()])
-	#process = StringField('Coffee Processing Type')
+	origing = StringField('Coffee Processing Type')
 	altitude = IntegerField('Altitude', validators = [DataRequired()])
 	grind = FloatField('Grind Setting', validators = [DataRequired()])
 	espresso = BooleanField('Espresso')

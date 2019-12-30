@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <body class="text-center">
+	<td><img src="{{url_for('static', filename='dog.jpg')}}" width = "340" height = "340"></td>
+  	<p> </p>
+  	<a class="btn btn-secondary" id = "chgtext" onclick="document.getElementById('chgtext').innerHTML='Take your birth control!';">Do you want a useful reminder?</a>&nbsp; &nbsp;
+
+{% endblock %}

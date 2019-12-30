@@ -4,6 +4,7 @@ from app.forms import LoginForm, RegistrationForm, EditProfileForm, ReviewForm, 
 from app.models import User, Review
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from data_handler import map_input
 from datetime import datetime
 import numpy as np
 import pickle
@@ -14,7 +15,7 @@ import pickle
 def index():
 	form = ReviewForm()
 	if form.validate_on_submit():
-		review = Review(name=form.name.data, origin=form.origin.data, altitude=form.altitude.data,
+		review = Review(name=form.name.data, origin=form.origin.data, process = form.origing.data, altitude=form.altitude.data,
 			grind=form.grind.data, espresso=form.espresso.data, tasting=form.tasting.data, 
 			review=form.review.data, author=current_user)
 		db.session.add(review)
@@ -108,10 +109,25 @@ def predict():
 	origin = form.origin.data
 	altitude = form.altitude.data
 	process = form.origing.data
-	loaded_model = pickle.load(open('./data/model.pkl', 'rb'))
-	prediction = loaded_model.predict(final_features)
+	if altitude is not None:
+		final_features = [map_input(altitude, origin, process)]
+		print(final_features)
+		loaded_model = pickle.load(open('./data/model.pkl', 'rb'))
+		prediction = loaded_model.predict(final_features)
 
-	#output = round(prediction[0], 2)
-	output = "HI"
+		if prediction[0] == 1:
+			output = "That's gonna be a fucking great cup of coffee!"
+		else:
+			output = "Nice try, dumbass. This coffee is gonna be gross. I will watch you weep into your cup."
+	else:
+		output = 'Enter a Value'
 
-	return render_template('predict.html', prediction_text='Sales should be $ {}'.format(output), form1=form_1)
+	return render_template('predict.html', prediction_text='{}'.format(output), form1=form)
+
+@app.route('/about',methods=['GET','POST'])
+def about():
+	return render_template('about.html')
+
+@app.route('/link',methods=['GET','POST'])
+def link():
+	return render_template('link.html')

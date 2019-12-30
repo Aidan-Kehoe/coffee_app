@@ -35,6 +35,7 @@ class EnsembleClassifier(object):
 	def fit(self):
 		self.load_data()
 		self.clf.fit(self.X_data[0],self.train_label)
+		return self.clf
 
 
 	def predict(self):

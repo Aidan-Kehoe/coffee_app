@@ -35,7 +35,7 @@ class Review(db.Model):
 	name = db.Column(db.String(64))
 	origin = db.Column(db.String(64))
 	altitude = db.Column(db.Integer)
-	#process = db.Column(db.String(64))
+	process = db.Column(db.String(64))
 	grind = db.Column(db.Float)
 	espresso = db.Column(db.Boolean, default = 0)
 	tasting = db.Column(db.String(120))
@@ -44,4 +44,4 @@ class Review(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 	def __repr__(self):
-		return '<Review {}>'.format(self.body)
+		return '{}'.format(self.name, self.origin, self.process, self.altitude, self.grind, self.espresso, self.tasting, self.review)
